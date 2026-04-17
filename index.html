@@ -1,73 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My First Web Game</title>
-    <style>
-        /* CSS: This makes the page look nice */
-        body { 
-            text-align: center; 
-            background-color: #222; 
-            color: white; 
-            font-family: Arial, sans-serif; 
-        }
-        canvas { 
-            background-color: #f4f4f4; 
-            border: 4px solid #fff; 
-            border-radius: 8px;
-            margin-top: 20px; 
-        }
-    </style>
+    <title>My Clicker Game</title>
 </head>
 <body>
 
-    <h1>Move the Red Box!</h1>
-    <p>Click the game board, then use your keyboard's Arrow Keys.</p>
-    
-    <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <h1>Gold Miner</h1>
+    <button id="main-clicker">Mine Gold (+10)</button> 
+    <p id="player-score">Score: 0</p>
+    <button id="buy-robot">Buy Robot Helper (100 Points)</button>
 
     <script>
-        // 1. Set up the game board (the canvas)
-        const canvas = document.getElementById("gameCanvas");
-        const ctx = canvas.getContext("2d");
+        // 1. Find the elements
+        let clickerButton = document.getElementById("main-clicker");
+        let scoreDisplay = document.getElementById("player-score");
+        let robotButton = document.getElementById("buy-robot");
+        
+        // 2. The Game Memory
+        let score = 0;
+        let robots = 0;
+        let robotCost = 100;
 
-        // 2. Set up our player (the red box)
-        let playerX = 175; // Starting left-to-right position
-        let playerY = 175; // Starting up-and-down position
-        const playerSize = 50;
-        const playerSpeed = 10;
-
-        // 3. Create a function to draw the game
-        function drawGame() {
-            // First, clear the old drawing
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Second, draw the red box in its new position
-            ctx.fillStyle = "red";
-            ctx.fillRect(playerX, playerY, playerSize, playerSize);
-        }
-
-        // 4. Listen for keyboard presses to move the box
-        document.addEventListener("keydown", function(event) {
-            // Check which key was pressed and change the coordinates
-            if (event.key === "ArrowUp") {
-                playerY = playerY - playerSpeed; // Move up
-            }
-            if (event.key === "ArrowDown") {
-                playerY = playerY + playerSpeed; // Move down
-            }
-            if (event.key === "ArrowLeft") {
-                playerX = playerX - playerSpeed; // Move left
-            }
-            if (event.key === "ArrowRight") {
-                playerX = playerX + playerSpeed; // Move right
-            }
-            
-            // Redraw the game immediately after moving
-            drawGame(); 
+        // 3. The Main Click Button
+        clickerButton.addEventListener("click", function() {
+            score = score + 10; 
+            scoreDisplay.innerText = "Score: " + score; 
         });
 
-        // 5. Draw the game for the very first time when the page loads
-        drawGame();
+        // 4. The Store (Buying a Robot)
+        robotButton.addEventListener("click", function() {
+            if (score >= robotCost) {
+                score = score - robotCost; // Pay for it
+                robots = robots + 1;       // Gain a robot
+                scoreDisplay.innerText = "Score: " + score; // Update screen
+            }
+        });
+
+        // 5. The Auto-Clicker (Now powered by your robots!)
+        setInterval(function() {
+            // Adds 1 base point, PLUS 10 points for every robot you own!
+            score = score + 1 + (robots * 10); 
+            scoreDisplay.innerText = "Score: " + score; 
+        }, 1000); 
     </script>
 
 </body>
