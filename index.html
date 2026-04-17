@@ -2,6 +2,13 @@
 <html>
 <head>
     <title>My Clicker Game</title>
+    
+    <style>
+        body {
+            text-align: center; 
+            margin-top: 50px; 
+        }
+    </style>
 </head>
 <body>
 
@@ -11,34 +18,28 @@
     <button id="buy-robot">Buy Robot Helper (100 Points)</button>
 
     <script>
-        // 1. Find the elements
         let clickerButton = document.getElementById("main-clicker");
         let scoreDisplay = document.getElementById("player-score");
         let robotButton = document.getElementById("buy-robot");
         
-        // 2. The Game Memory
         let score = 0;
         let robots = 0;
         let robotCost = 100;
 
-        // 3. The Main Click Button
         clickerButton.addEventListener("click", function() {
             score = score + 10; 
             scoreDisplay.innerText = "Score: " + score; 
         });
 
-        // 4. The Store (Buying a Robot)
         robotButton.addEventListener("click", function() {
             if (score >= robotCost) {
-                score = score - robotCost; // Pay for it
-                robots = robots + 1;       // Gain a robot
-                scoreDisplay.innerText = "Score: " + score; // Update screen
+                score = score - robotCost; 
+                robots = robots + 1;       
+                scoreDisplay.innerText = "Score: " + score; 
             }
         });
 
-        // 5. The Auto-Clicker (Now powered by your robots!)
         setInterval(function() {
-            // Adds 1 base point, PLUS 10 points for every robot you own!
             score = score + 1 + (robots * 10); 
             scoreDisplay.innerText = "Score: " + score; 
         }, 1000); 
