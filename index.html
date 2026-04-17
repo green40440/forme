@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My First Web Game</title>
+    <style>
+        /* CSS: This makes the page look nice */
+        body { 
+            text-align: center; 
+            background-color: #222; 
+            color: white; 
+            font-family: Arial, sans-serif; 
+        }
+        canvas { 
+            background-color: #f4f4f4; 
+            border: 4px solid #fff; 
+            border-radius: 8px;
+            margin-top: 20px; 
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Move the Red Box!</h1>
+    <p>Click the game board, then use your keyboard's Arrow Keys.</p>
+    
+    <canvas id="gameCanvas" width="400" height="400"></canvas>
+
+    <script>
+        // 1. Set up the game board (the canvas)
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+
+        // 2. Set up our player (the red box)
+        let playerX = 175; // Starting left-to-right position
+        let playerY = 175; // Starting up-and-down position
+        const playerSize = 50;
+        const playerSpeed = 10;
+
+        // 3. Create a function to draw the game
+        function drawGame() {
+            // First, clear the old drawing
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Second, draw the red box in its new position
+            ctx.fillStyle = "red";
+            ctx.fillRect(playerX, playerY, playerSize, playerSize);
+        }
+
+        // 4. Listen for keyboard presses to move the box
+        document.addEventListener("keydown", function(event) {
+            // Check which key was pressed and change the coordinates
+            if (event.key === "ArrowUp") {
+                playerY = playerY - playerSpeed; // Move up
+            }
+            if (event.key === "ArrowDown") {
+                playerY = playerY + playerSpeed; // Move down
+            }
+            if (event.key === "ArrowLeft") {
+                playerX = playerX - playerSpeed; // Move left
+            }
+            if (event.key === "ArrowRight") {
+                playerX = playerX + playerSpeed; // Move right
+            }
+            
+            // Redraw the game immediately after moving
+            drawGame(); 
+        });
+
+        // 5. Draw the game for the very first time when the page loads
+        drawGame();
+    </script>
+
+</body>
+</html>
