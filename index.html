@@ -1,63 +1,70 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My First Clicker Game</title>
+    <title>My Clicker Game</title>
     
-   <style>
-    body {
-        text-align: center; 
-        margin-top: 50px; 
-        background-color: gold; 
-    }
+    <style>
+        body {
+            text-align: center; 
+            margin-top: 50px; 
+            background-color: orange; 
+        }
 
-    button {
-        font-size: 20px; 
-        padding: 15px 30px; 
-    }
+        button {
+            font-size: 20px; 
+            padding: 15px 30px; 
+        }
 
-    /* The new rule for your score! */
-    #player-score {
-        font-size: 50px; 
-        font-weight: bold; 
-    }
-</style>
+        #player-score {
+            font-size: 40px; 
+            font-weight: bold; 
+        }
+    </style>
 </head>
-
 <body>
 
     <h1>Gold Miner</h1>
     <button id="main-clicker">Mine Gold (+100)</button> 
+    
     <p id="player-score">Score: 0</p>
+    
     <button id="buy-robot">Buy Robot Helper (100 Points)</button>
+    
+    <p id="robot-count">Robots Owned: 0</p>
 
     <script>
+        // 1. Find the elements (Notice the new robotDisplay line!)
         let clickerButton = document.getElementById("main-clicker");
         let scoreDisplay = document.getElementById("player-score");
         let robotButton = document.getElementById("buy-robot");
+        let robotDisplay = document.getElementById("robot-count"); 
         
+        // 2. The Game Memory
         let score = 0;
         let robots = 0;
         let robotCost = 100;
 
+        // 3. The Main Click Button (I updated it to your 100 points!)
         clickerButton.addEventListener("click", function() {
             score = score + 100; 
             scoreDisplay.innerText = "Score: " + score; 
         });
 
+        // 4. The Store (Buying a Robot)
         robotButton.addEventListener("click", function() {
             if (score >= robotCost) {
                 score = score - robotCost; 
                 robots = robots + 1;       
                 
-                // Add this new line right here!
+                // Here is the new line updating the screen!
                 robotDisplay.innerText = "Robots Owned: " + robots;
-                
                 scoreDisplay.innerText = "Score: " + score; 
             }
         });
 
+        // 5. The Auto-Clicker 
         setInterval(function() {
-            score = score + 1 + (robots * 100); 
+            score = score + 1 + (robots * 10); 
             scoreDisplay.innerText = "Score: " + score; 
         }, 1000); 
     </script>
