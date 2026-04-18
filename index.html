@@ -48,6 +48,10 @@
             if (score >= robotCost) {
                 score = score - robotCost; 
                 robots = robots + 1;       
+                
+                // Add this new line right here!
+                robotDisplay.innerText = "Robots Owned: " + robots;
+                
                 scoreDisplay.innerText = "Score: " + score; 
             }
         });
