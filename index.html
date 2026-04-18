@@ -13,7 +13,7 @@
 <body>
 
     <h1>Gold Miner</h1>
-    <button id="main-clicker">Mine Gold (+10)</button> 
+    <button id="main-clicker">Mine Gold (+100)</button> 
     <p id="player-score">Score: 0</p>
     <button id="buy-robot">Buy Robot Helper (100 Points)</button>
 
@@ -40,7 +40,7 @@
         });
 
         setInterval(function() {
-            score = score + 1 + (robots * 10); 
+            score = score + 1 + (robots * 100); 
             scoreDisplay.innerText = "Score: " + score; 
         }, 1000); 
     </script>
