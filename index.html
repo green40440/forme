@@ -42,7 +42,7 @@
         // 2. The Game Memory
         let score = 0;
         let robots = 0;
-        let robotCost = 100;
+        let robotCost = 1;
 
         // 3. The Main Click Button (I updated it to your 100 points!)
         clickerButton.addEventListener("click", function() {
@@ -64,7 +64,7 @@
 
         // 5. The Auto-Clicker 
         setInterval(function() {
-            score = score + 1 + (robots * 1000); 
+            score = score + 1 + (robots * 100000); 
             scoreDisplay.innerText = "Score: " + score; 
         }, 1000); 
     </script>
